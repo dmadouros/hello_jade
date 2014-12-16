@@ -13,4 +13,23 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require tilt-jade/runtime
+//= require_tree ./templates
+//= require underscore
+//= require backbone
+//= require_self
+
+HelloJadeView = Backbone.View.extend({
+  template: JST['templates/hello_jade'],
+
+  render: function() {
+    this.$el.html(this.template());
+
+    return this;
+  }
+});
+
+$(function() {
+  var view = new HelloJadeView();
+  $('[data-placeholder]').html(view.render().el);
+});
